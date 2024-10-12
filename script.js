@@ -1,0 +1,1 @@
+console.log("Budget tracker is running");
