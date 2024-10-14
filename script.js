@@ -2,6 +2,9 @@ console.log("Budget tracker is running");
 // Get elements from the HTML file
 const form = document.getElementById('transaction-form');
 const transactionList = document.getElementById('transaction-list');
+let balance = 0;
+let totalIncome = 0;
+let totalExpenses = 0;
 
 //Create array for transactions
 let transactions = [];
@@ -25,11 +28,14 @@ form.addEventListener('submit', (event) => {
 
     // Update the transaction list
     displayTransactions();
+
+    // Calculate balance
+    calcBalance(amount);
 });
 
-// Function to put the transactions tto the list
+// Function to put the transactions to the list
 function displayTransactions() {
-    
+
     // Clear the current list 
     transactionList.innerHTML= '';
 
@@ -41,3 +47,20 @@ function displayTransactions() {
     })
 };
 
+// Function that calculates total balance
+function calcBalance(amount) {
+
+    // Check if the amount is negative or positive
+    if (amount >= 0) {
+        totalIncome += amount;
+    } else {
+        totalExpenses += amount;
+    }
+
+    balance = totalIncome + totalExpenses;
+
+    document.getElementById('balance').innerHTML = balance;
+    document.getElementById('income').innerHTML = totalIncome;
+    document.getElementById('expenses').innerHTML = totalExpenses;
+    console.log("your balance is " + balance);
+}

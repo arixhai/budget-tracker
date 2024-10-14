@@ -58,3 +58,26 @@ h2 {
     border-radius: 5px;
     margin: 5px 0;
 }
+
+.balance-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-align: left;
+    margin-right: 90px;
+}
+
+#balance {
+    color: black;
+    font-weight: bold;
+}
+
+#income {
+    color: #28a745;
+    font-weight: bold;
+}
+
+#expenses {
+    color: red;
+    font-weight: bold;
+}
