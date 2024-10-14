@@ -57,8 +57,10 @@ function calcBalance(amount) {
         totalExpenses += amount;
     }
 
+    // Calculate balance 
     balance = totalIncome + totalExpenses;
 
+    // Make changes to HTML
     document.getElementById('balance').innerHTML = balance;
     document.getElementById('income').innerHTML = totalIncome;
     document.getElementById('expenses').innerHTML = totalExpenses;
