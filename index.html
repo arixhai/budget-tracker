@@ -7,7 +7,20 @@
     <title>Budget Tracker App</title>
 </head>
 <body>
-    <h1>hello!</h1>
+    <h1>Welcome to the Budget Tracker App</h1>
+
+    <div>
+        <h2>Add Transaction</h2>
+        <form id="transaction-form">
+            <input type="text" id="description" placeholder="Description" reqquired>
+            <input type="number" id="amount" placeholder="Amount" required>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+    <div>
+        <h2>Transaction History</h2>
+        <ul id="transaction-list"></ul>
+    </div>
 </body>
 <script src="script.js"></script>
 </html>
