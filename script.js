@@ -42,7 +42,7 @@ function displayTransactions() {
     // Loop through transactions and create list items
     transactions.forEach((transaction, index) => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${transaction.description}: $${transaction.amount.toFixed(2)}`;
+            listItem.textContent = `${transaction.description}: £${transaction.amount.toFixed(2)}`;
             transactionList.appendChild(listItem);
     })
 };
@@ -61,8 +61,8 @@ function calcBalance(amount) {
     balance = totalIncome + totalExpenses;
 
     // Make changes to HTML
-    document.getElementById('balance').innerHTML = balance;
-    document.getElementById('income').innerHTML = totalIncome;
-    document.getElementById('expenses').innerHTML = totalExpenses;
+    document.getElementById('balance').innerHTML ='£' + balance;
+    document.getElementById('income').innerHTML ='£' + totalIncome;
+    document.getElementById('expenses').innerHTML ='£' + totalExpenses;
     console.log("your balance is " + balance);
 }
