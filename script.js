@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', function() {
+
 console.log("Budget tracker is running");
 // Get elements from the HTML file
 const form = document.getElementById('transaction-form');
@@ -8,11 +10,19 @@ let totalExpenses = 0;
 
 //Create array for transactions
 let transactions = [];
+let currentEdittingIndex = null; 
 
 // Create an event listener for form submition
 form.addEventListener('submit', (event) => {
     event.preventDefault(); // Prevents the page from reloading 
 
+    if (currentEdittingIndex !== null) {
+        transactions[currentEdittingIndex] = transaction;
+        currentEdittingIndex = null;
+    } else {
+        transactions.push(transaction);
+    }
+    
     // Get input from fields
     const description = document.getElementById('description').value;
     const amount = parseFloat(document.getElementById('amount').value);
@@ -36,6 +46,16 @@ form.addEventListener('submit', (event) => {
     calcBalance(amount);
 });
 
+// Function to edit transaction
+function editTransaction(index) {
+    const transaction = transactions[index];
+
+    document.getElementById('document').value = transaction.description;
+    document.getElementById('amount').value = transaction.amount;
+
+    currentEdittingIndex = index;   
+}
+
 // Function to put the transactions to the list
 function displayTransactions() {
 
@@ -51,11 +71,14 @@ function displayTransactions() {
             listItem.textContent = `${transaction.description}: £${transaction.amount.toFixed(2)}`;
             editBtn.textContent = 'Edit';
             deleteBtn.textContent = 'X';
-            
+
             transactionList.appendChild(listItem);
             listItem.appendChild(editBtn);
             listItem.appendChild(deleteBtn);
             console.log("list item created");
+
+            editBtn.addEventListener('click', ()=> editTransaction(index));
+
     })
 };
 
@@ -105,3 +128,5 @@ displayTransactions(transactions);
 transactions.forEach(transaction => {
     calcBalance(transaction.amount);
 })
+
+});
