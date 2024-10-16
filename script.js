@@ -23,6 +23,9 @@ form.addEventListener('submit', (event) => {
 
     console.log(transactions);
 
+    // Save to localStorage
+    saveTransactionsToLocalStorage()
+
     // Clear the form
     form.reset();
 
@@ -63,6 +66,31 @@ function calcBalance(amount) {
     // Make changes to HTML
     document.getElementById('balance').innerHTML ='£' + balance;
     document.getElementById('income').innerHTML ='£' + totalIncome;
-    document.getElementById('expenses').innerHTML ='£' + totalExpenses;
+    document.getElementById('expenses').innerHTML ='£' + (totalExpenses * -1);
     console.log("your balance is " + balance);
 }
+
+// Create a function that saves the transactions to localStorage
+function saveTransactionsToLocalStorage() {
+    localStorage.setItem('transactions', JSON.stringify(transactions));
+}
+
+// Create a function that loads the transactions from localStorage
+function loadTransactionsFromLocalStorage() {
+    return JSON.parse(localStorage.getItem('transactions')) || [];
+}
+
+// Get the transactions from the local Storage
+transactions = loadTransactionsFromLocalStorage();
+
+// Reset totals before recalculating totals
+totalIncome = 0;
+totalExpenses = 0;
+
+// Displlaay the transactions
+displayTransactions(transactions);
+
+// Iterate through the transactions and calculate the balance
+transactions.forEach(transaction => {
+    calcBalance(transaction.amount);
+})
