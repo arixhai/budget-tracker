@@ -45,8 +45,17 @@ function displayTransactions() {
     // Loop through transactions and create list items
     transactions.forEach((transaction, index) => {
             const listItem = document.createElement('li');
+            const editBtn = document.createElement('button');
+            const deleteBtn = document.createElement('button');
+
             listItem.textContent = `${transaction.description}: £${transaction.amount.toFixed(2)}`;
+            editBtn.textContent = 'Edit';
+            deleteBtn.textContent = 'X';
+            
             transactionList.appendChild(listItem);
+            listItem.appendChild(editBtn);
+            listItem.appendChild(deleteBtn);
+            console.log("list item created");
     })
 };
 
@@ -62,6 +71,8 @@ function calcBalance(amount) {
 
     // Calculate balance 
     balance = totalIncome + totalExpenses;
+    console.log("total expsenses: "+ totalExpenses);
+    console.log("total income: "+ totalIncome);
 
     // Make changes to HTML
     document.getElementById('balance').innerHTML ='£' + balance;
