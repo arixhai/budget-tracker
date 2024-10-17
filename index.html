@@ -7,30 +7,36 @@
     <title>Budget Tracker App</title>
 </head>
 <body>
-    <h1>Welcome to the Budget Tracker App</h1>
+    <div class="container">
+        <h1>Welcome to the Budget Tracker App</h1>
 
-    <div>
-        <h2>Add Transaction</h2>
-        <form id="transaction-form">
-            <input type="text" id="description" placeholder="Description" reqquired>
-            <input type="number" id="amount" placeholder="Amount" required>
-            <button type="submit">Add</button>
-        </form>
-    </div>
-    <div>
-        <h2>Transaction History</h2>
-        <ul id="transaction-list"></ul>
-    </div>
-    <div class="balance-container">
-        <h2>Balance: </h2> 
-            <p id="balance">£0</p>
+        <div class="main-content">
+
+            <div class="transaction-form">
+                <h2>Add Transaction</h2>
+                <form id="transaction-form">
+                    <input type="text" id="description" placeholder="Description" required>
+                    <input type="number" id="amount" placeholder="Amount" required>
+                    <button type="submit">Add</button>
+                </form>
+
+                <h2>Transaction History</h2>
+                <ul id="transaction-list"></ul>
+            </div>
+
+            <div class="balance-container">
+                <h2>Balance: </h2> 
+                <p id="balance">£0.00</p>
             
-        <h3>Income: </h3> 
-            <p id="income">£0</p>
+                <h3>Income: </h3> 
+                <p id="income">£0.00</p>
             
-        <h3>Expenses: </h3> 
-            <p id="expenses">£0</p>  
+                <h3>Expenses: </h3> 
+                <p id="expenses">£0.00</p>  
+            </div>
+        </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>

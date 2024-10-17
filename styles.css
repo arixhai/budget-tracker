@@ -1,83 +1,157 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
 }
 
-h1 {
-    text-align: center;
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+    display: flex;
+    justify-content: space-between; 
     margin-top: 20px;
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-#transaction-form {
+.balance-container {
+    width: 40%; 
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 20px 0;
-}
-
-#transaction-form input {
-    margin: 10px;
-    padding: 10px;
-    width: 200px;
-    border: 1px solid #ccc;
+    align-items: flex-end; 
+    padding: 20px;
+    background-color: #f8f8f8;
     border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-#transaction-form button {
-    padding: 10px 20px;
+.balance-container h2, .balance-container h3 {
+    margin: 10px 0;
+}
+
+.balance-container p {
+    font-size: 1.5rem;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+.balance-container #balance {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.balance-container #income {
+    color: green;
+}
+
+.balance-container #expenses {
+    color: red;
+}
+
+.transaction-form {
+    width: 55%; 
+}
+
+form {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+form button {
+    width: 100%;
+    padding: 10px;
     background-color: #28a745;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 3px;
     cursor: pointer;
+    font-size: 1rem;
 }
 
-#transaction-form button:hover {
+form button:hover {
     background-color: #218838;
 }
 
-#transaction-list {
+ul#transaction-list {
     list-style: none;
     padding: 0;
-    margin: 20px 0;
-    max-width: 400px;
-    margin: 0 auto;
+    margin: 0;
 }
 
-#transaction-list li {
+ul#transaction-list li {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f8f8;
     padding: 10px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
     margin: 5px 0;
+    border-radius: 5px;
+    border-left: 5px solid green; 
 }
 
-.balance-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    text-align: left;
-    margin-right: 90px;
+ul#transaction-list li.expense {
+    border-left: 5px solid red; 
 }
 
-#balance {
-    color: black;
-    font-weight: bold;
+ul#transaction-list li .buttons {
+    display: flex;
+    gap: 5px;
 }
 
-#income {
-    color: #28a745;
-    font-weight: bold;
+ul#transaction-list button {
+    background-color: #ff5555;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 3px;
+    cursor: pointer;
 }
 
-#expenses {
-    color: red;
-    font-weight: bold;
+ul#transaction-list button.edit {
+    background-color: #007bff;
+}
+
+ul#transaction-list button:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+    .main-content {
+        flex-direction: column; 
+    }
+
+    .balance-container {
+        width: 100%; 
+        align-items: center; 
+    }
+
+    .transaction-form {
+        width: 100%; 
+    }
+
+    ul#transaction-list li {
+        flex-direction: column;
+    }
+
+    form input, form button {
+        width: 100%;
+    }
 }

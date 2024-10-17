@@ -38,12 +38,12 @@ form.addEventListener('submit', (event) => {
     // Clear the form
     form.reset();
 
-    // Update the transaction list
-    displayTransactions();
-
     totalIncome = 0; // Reinitialize totals
     totalExpenses = 0;
     transactions.forEach(transaction => calcBalance(transaction.amount)); // Calculate after every submition
+
+    // Update the transaction list
+    displayTransactions();
 });
 
 // Function to edit transaction
@@ -63,15 +63,25 @@ function editTransaction(index) {
 function deleteTransaction(index){
     // Remove transaction from array
     transactions.splice(index, 1);
+    console.log(transactions);
 
     // Save changes to localStorage and update UI
     saveTransactionsToLocalStorage();
-    displayTransactions()
-
+   
     // Reinitialize totals 
     totalIncome = 0;
     totalExpenses = 0;
-    transactions.forEach(transaction => calcBalance(transaction.amount));
+    console.log(totalExpenses, totalIncome);
+    
+    if (transactions.length === 0) {
+        calcBalance(0);
+    } else {
+        transactions.forEach(transaction => {
+            calcBalance(transaction.amount); // Call the function to update totals
+        });
+    }
+
+    displayTransactions()
 }
 
 // Function to put the transactions to the list
@@ -115,12 +125,13 @@ function calcBalance(amount) {
     balance = totalIncome + totalExpenses;
     console.log("total expsenses: "+ totalExpenses);
     console.log("total income: "+ totalIncome);
+    console.log("your balance is " + balance);
 
     // Make changes to HTML
-    document.getElementById('balance').innerHTML ='£' + balance;
-    document.getElementById('income').innerHTML ='£' + totalIncome;
-    document.getElementById('expenses').innerHTML ='£' + (totalExpenses * -1);
-    console.log("your balance is " + balance);
+    document.getElementById('balance').innerHTML ='£' + balance.toFixed(2);
+    document.getElementById('income').innerHTML ='£' + totalIncome.toFixed(2);
+    document.getElementById('expenses').innerHTML ='£' + (totalExpenses * -1).toFixed(2);
+    
 }
 
 // Create a function that saves the transactions to localStorage
