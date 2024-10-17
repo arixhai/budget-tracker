@@ -10,18 +10,11 @@ let totalExpenses = 0;
 
 //Create array for transactions
 let transactions = [];
-let currentEdittingIndex = null; 
+let currentEdittingIndex = -1; 
 
 // Create an event listener for form submition
 form.addEventListener('submit', (event) => {
     event.preventDefault(); // Prevents the page from reloading 
-
-    if (currentEdittingIndex !== null) {
-        transactions[currentEdittingIndex] = transaction;
-        currentEdittingIndex = null;
-    } else {
-        transactions.push(transaction);
-    }
     
     // Get input from fields
     const description = document.getElementById('description').value;
@@ -29,8 +22,14 @@ form.addEventListener('submit', (event) => {
 
     // Create transaction object
     const transaction = {description, amount};
-    transactions.push(transaction); // Add the transaction to the array
 
+    if (currentEdittingIndex >= 0){
+        transactions[currentEdittingIndex] = transaction;
+        currentEdittingIndex = -1;
+    } else {
+        transactions.push(transaction); // Add the transaction to the array
+    }
+   
     console.log(transactions);
 
     // Save to localStorage
@@ -42,18 +41,37 @@ form.addEventListener('submit', (event) => {
     // Update the transaction list
     displayTransactions();
 
-    // Calculate balance
-    calcBalance(amount);
+    totalIncome = 0; // Reinitialize totals
+    totalExpenses = 0;
+    transactions.forEach(transaction => calcBalance(transaction.amount)); // Calculate after every submition
 });
 
 // Function to edit transaction
 function editTransaction(index) {
+    const descriptionInput = document.getElementById('description');
+    const amountInput = document.getElementById('amount');
+
     const transaction = transactions[index];
 
-    document.getElementById('document').value = transaction.description;
-    document.getElementById('amount').value = transaction.amount;
+    descriptionInput.value = transaction.description;
+    amountInput.value = transaction.amount;
 
     currentEdittingIndex = index;   
+}
+
+// Function to delete transaction
+function deleteTransaction(index){
+    // Remove transaction from array
+    transactions.splice(index, 1);
+
+    // Save changes to localStorage and update UI
+    saveTransactionsToLocalStorage();
+    displayTransactions()
+
+    // Reinitialize totals 
+    totalIncome = 0;
+    totalExpenses = 0;
+    transactions.forEach(transaction => calcBalance(transaction.amount));
 }
 
 // Function to put the transactions to the list
@@ -78,6 +96,7 @@ function displayTransactions() {
             console.log("list item created");
 
             editBtn.addEventListener('click', ()=> editTransaction(index));
+            deleteBtn.addEventListener('click', ()=> deleteTransaction(index));
 
     })
 };
@@ -121,7 +140,7 @@ transactions = loadTransactionsFromLocalStorage();
 totalIncome = 0;
 totalExpenses = 0;
 
-// Displlaay the transactions
+// Display the transactions
 displayTransactions(transactions);
 
 // Iterate through the transactions and calculate the balance
